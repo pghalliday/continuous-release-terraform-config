@@ -20,6 +20,8 @@ The following have been pre-created though the AWS console
   - `arn:aws:kms:eu-west-1:735561797792:key/1370ee9f-0821-4035-8524-909190defc7e`
 - An S3 bucket to remotely store terraform states
   - `continuous-release-terraform`
+- An EC2 key pair to log in to instances
+  - `continuous-release-terraform`
 
 ## Layers
 
