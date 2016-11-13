@@ -1,0 +1,14 @@
+- Associate DNS
+  - Discovery - maybe Consul?
+  - ELB?
+  - ALB? (won't work for jnlp)
+- Internal only for jnlp (port 50000)
+- External for http (port 8080)
+  - map to port 80
+  - add SSL (port 443)?
+- back up and restore Jenkins configuration
+  - or configure with configuration management?
+  - or build into docker image?
+- deploy build artifacts to S3 storage
+- Add webserver to front end S3 storage
+- integrate with SSO (single sign on) solution
