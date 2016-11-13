@@ -6,7 +6,7 @@ data "terraform_remote_state" "network" {
 	backend = "s3"
 	config {
 		bucket = "${var.aws_s3_bucket}"
-		key = "${var.aws_s3_key}"
+		key = "${var.aws_s3_network_key}"
     region = "${var.aws_region}"
     encrypt = true
     kms_key_id = "${var.aws_kms_key_id}"
