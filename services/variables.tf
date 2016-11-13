@@ -6,10 +6,6 @@ variable "aws_s3_bucket" {
   default = "continuous-release-terraform"
 }
 
-variable "aws_s3_network_key" {
-  default = "network/terraform.tfstate"
-}
-
 variable "aws_s3_cluster_key" {
   default = "cluster/terraform.tfstate"
 }

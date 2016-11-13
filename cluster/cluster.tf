@@ -3,14 +3,14 @@ provider "aws" {
 }
 
 data "terraform_remote_state" "network" {
-	backend = "s3"
-	config {
-		bucket = "${var.aws_s3_bucket}"
-		key = "${var.aws_s3_network_key}"
+  backend = "s3"
+  config {
+    bucket = "${var.aws_s3_bucket}"
+    key = "${var.aws_s3_network_key}"
     region = "${var.aws_region}"
     encrypt = true
     kms_key_id = "${var.aws_kms_key_id}"
-	}
+  }
 }
 
 resource "aws_ecs_cluster" "cluster" {
@@ -84,10 +84,10 @@ EOF
 
 resource "aws_autoscaling_group" "group" {
   vpc_zone_identifier = [
-		"${data.terraform_remote_state.network.subnet_a_id}",
-		"${data.terraform_remote_state.network.subnet_b_id}",
-		"${data.terraform_remote_state.network.subnet_c_id}"
-	]
+    "${data.terraform_remote_state.network.subnet_a_id}",
+    "${data.terraform_remote_state.network.subnet_b_id}",
+    "${data.terraform_remote_state.network.subnet_c_id}"
+  ]
   max_size = 4
   min_size = 2
   desired_capacity = 3

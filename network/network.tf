@@ -28,8 +28,8 @@ resource "aws_subnet" "a" {
 }
 
 resource "aws_route_table_association" "a" {
-	subnet_id = "${aws_subnet.a.id}"
-	route_table_id = "${aws_route_table.rt.id}"
+  subnet_id = "${aws_subnet.a.id}"
+  route_table_id = "${aws_route_table.rt.id}"
 }
 
 resource "aws_subnet" "b" {
@@ -40,8 +40,8 @@ resource "aws_subnet" "b" {
 }
 
 resource "aws_route_table_association" "b" {
-	subnet_id = "${aws_subnet.b.id}"
-	route_table_id = "${aws_route_table.rt.id}"
+  subnet_id = "${aws_subnet.b.id}"
+  route_table_id = "${aws_route_table.rt.id}"
 }
 
 resource "aws_subnet" "c" {
@@ -52,6 +52,6 @@ resource "aws_subnet" "c" {
 }
 
 resource "aws_route_table_association" "c" {
-	subnet_id = "${aws_subnet.c.id}"
-	route_table_id = "${aws_route_table.rt.id}"
+  subnet_id = "${aws_subnet.c.id}"
+  route_table_id = "${aws_route_table.rt.id}"
 }
