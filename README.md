@@ -27,6 +27,7 @@ The following have been pre-created though the AWS console
 ## Layers
 
 - network - VPC, etc
+- consul - Autoscaling group as consul cluster for discovery, etc
 - cluster - ECS Cluster config and autoscaling group
 - repositories - ECS Storage for docker images
 - services - ECS Task definitions and services to deploy on cluster

@@ -66,14 +66,14 @@ resource "aws_security_group_rule" "egress_all" {
     security_group_id = "${aws_security_group.security_group.id}"
 }
 
-data "template_file" "consul-registrator" {
-  template = "${file("${path.module}/consul-registrator.tpl")}"
+data "template_file" "consul" {
+  template = "${file("${path.module}/consul.tpl")}"
   vars {}
 }
 
-resource "aws_ecs_task_definition" "consul-registrator" {
-  family = "consul-registrator"
-  container_definitions = "${data.template_file.consul-registrator.rendered}"
+resource "aws_ecs_task_definition" "consul" {
+  family = "consul"
+  container_definitions = "${data.template_file.consul.rendered}"
 }
 
 data "template_file" "user_data" {
@@ -81,7 +81,7 @@ data "template_file" "user_data" {
   vars {
     cluster_name = "${var.cluster_name}"
     aws_region = "${var.aws_region}"
-    task_definition = "consul:${aws_ecs_task_definition.consul-registrator.revision}"
+    task_definition = "consul:${aws_ecs_task_definition.consul.revision}"
   }
 }
 
@@ -104,8 +104,8 @@ resource "aws_autoscaling_group" "group" {
     "${data.terraform_remote_state.network.subnet_b_id}",
     "${data.terraform_remote_state.network.subnet_c_id}"
   ]
-  max_size = 4
-  min_size = 2
-  desired_capacity = 3
+  max_size = 5
+  min_size = 3
+  desired_capacity = 4
   launch_configuration = "${aws_launch_configuration.lc.id}"
 }
