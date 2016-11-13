@@ -1,4 +1,4 @@
-# cluster
+# repositories
 
 Initialise from remote state with
 
@@ -18,3 +18,5 @@ Apply with
 ```
 terraform apply
 ```
+
+NB. this will create the repositories then build, tag and push the docker containers to them only on initial creation. Updates to the docker containers can then be built and pushed from their respective sub directories as required, following the instructions in their `README.md` files.

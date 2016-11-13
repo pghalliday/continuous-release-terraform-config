@@ -3,6 +3,7 @@
 ## Dependencies
 
 - [Terraform](https://www.terraform.io/downloads.html)
+- [Docker](https://www.docker.com/products/docker)
 - [AWS CLI](http://docs.aws.amazon.com/cli/latest/userguide/installing.html)
 - An AWS account with access key id, secret key and full admin permissions
 
@@ -28,7 +29,6 @@ The following have been pre-created though the AWS console
 - network - VPC, etc
 - cluster - ECS Cluster config and autoscaling group
 - repositories - ECS Storage for docker images
-- docker config - Build and push to repositories
 - services - ECS Task definitions and services to deploy on cluster
 
 Configured and deployed separately in this order to allow for migration to other buckets/network config/cluster/repositories later
