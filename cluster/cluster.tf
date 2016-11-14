@@ -17,6 +17,16 @@ resource "aws_ecs_cluster" "cluster" {
   name = "${var.cluster_name}"
 }
 
+data "template_file" "consul-registrator" {
+  template = "${file("${path.module}/consul-registrator.tpl")}"
+  vars {}
+}
+
+resource "aws_ecs_task_definition" "consul-registrator" {
+  family = "consul-registrator"
+  container_definitions = "${data.template_file.consul-registrator.rendered}"
+}
+
 resource "aws_iam_role" "role" {
     assume_role_policy = <<EOF
 {
@@ -35,9 +45,32 @@ resource "aws_iam_role" "role" {
 EOF
 }
 
-resource "aws_iam_role_policy_attachment" "attach" {
+resource "aws_iam_policy" "policy" {
+    name = "consul_client_policy"
+    policy = <<EOF
+{
+  "Version": "2012-10-17",
+  "Statement": [
+    {
+      "Action": [
+        "ecs:StartTask"
+      ],
+      "Effect": "Allow",
+      "Resource": "${aws_ecs_task_definition.consul-registrator.arn}"
+    }
+  ]
+}
+EOF
+}
+
+resource "aws_iam_role_policy_attachment" "attach_ecs" {
   role = "${aws_iam_role.role.id}"
   policy_arn = "${var.ecs_role_policy}"
+}
+
+resource "aws_iam_role_policy_attachment" "attach_consul" {
+  role = "${aws_iam_role.role.id}"
+  policy_arn = "${aws_iam_policy.policy.arn}"
 }
 
 resource "aws_iam_instance_profile" "profile" {
@@ -64,16 +97,6 @@ resource "aws_security_group_rule" "egress_all" {
     protocol = "tcp"
     cidr_blocks = ["0.0.0.0/0"]
     security_group_id = "${aws_security_group.security_group.id}"
-}
-
-data "template_file" "consul-registrator" {
-  template = "${file("${path.module}/consul-registrator.tpl")}"
-  vars {}
-}
-
-resource "aws_ecs_task_definition" "consul-registrator" {
-  family = "consul-registrator"
-  container_definitions = "${data.template_file.consul-registrator.rendered}"
 }
 
 data "template_file" "user_data" {

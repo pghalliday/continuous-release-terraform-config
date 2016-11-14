@@ -22,7 +22,7 @@ resource "aws_route" "r" {
   gateway_id = "${aws_internet_gateway.gw.id}"
 }
 
-resource "aws_subnet" "a" {
+resource "aws_subnet" "public_a" {
   vpc_id = "${aws_vpc.main.id}"
   cidr_block = "10.0.0.0/24"
   availability_zone = "${var.aws_region}a"
@@ -30,11 +30,11 @@ resource "aws_subnet" "a" {
 }
 
 resource "aws_route_table_association" "a" {
-  subnet_id = "${aws_subnet.a.id}"
+  subnet_id = "${aws_subnet.public_a.id}"
   route_table_id = "${aws_route_table.rt.id}"
 }
 
-resource "aws_subnet" "b" {
+resource "aws_subnet" "public_b" {
   vpc_id = "${aws_vpc.main.id}"
   cidr_block = "10.0.1.0/24"
   availability_zone = "${var.aws_region}b"
@@ -42,11 +42,11 @@ resource "aws_subnet" "b" {
 }
 
 resource "aws_route_table_association" "b" {
-  subnet_id = "${aws_subnet.b.id}"
+  subnet_id = "${aws_subnet.public_b.id}"
   route_table_id = "${aws_route_table.rt.id}"
 }
 
-resource "aws_subnet" "c" {
+resource "aws_subnet" "public_c" {
   vpc_id = "${aws_vpc.main.id}"
   cidr_block = "10.0.2.0/24"
   availability_zone = "${var.aws_region}c"
@@ -54,6 +54,6 @@ resource "aws_subnet" "c" {
 }
 
 resource "aws_route_table_association" "c" {
-  subnet_id = "${aws_subnet.c.id}"
+  subnet_id = "${aws_subnet.public_c.id}"
   route_table_id = "${aws_route_table.rt.id}"
 }

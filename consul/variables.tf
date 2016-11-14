@@ -33,3 +33,11 @@ variable "instance_type" {
 variable "ecs_role_policy" {
   default = "arn:aws:iam::aws:policy/service-role/AmazonEC2ContainerServiceforEC2Role"
 }
+
+variable "ec2_tag_key" {
+  default = "CONSUL_SERVER"
+}
+
+variable "ec2_tag_value" {
+  default = "TRUE"
+}
